@@ -6,79 +6,46 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>PageAI — The web, understood.</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{--bg:#0b0911;--purple:#a78bfa;--pink:#ec4899;--muted:#a49bb3}
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:#fff;font-family:Inter,sans-serif;overflow-x:hidden}
 a{color:inherit;text-decoration:none}
-button{font:inherit}
-.background{
-position:fixed;inset:0;z-index:-2;pointer-events:none;
-background:
-radial-gradient(ellipse at 50% 0%,#6225a52b,transparent 55%),
-radial-gradient(ellipse at 100% 60%,#a52d6b18,transparent 45%);
-}
-.grid-bg{
-position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.13;
-background-image:linear-gradient(#ffffff0b 1px,transparent 1px),linear-gradient(90deg,#ffffff0b 1px,transparent 1px);
-background-size:65px 65px;
-mask-image:linear-gradient(to bottom,black,transparent 85%);
-}
+button{font:inherit;cursor:pointer}
+
+.background{position:fixed;inset:0;z-index:-2;pointer-events:none;background:radial-gradient(ellipse at 50% 0%,#6225a52b,transparent 55%),radial-gradient(ellipse at 100% 60%,#a52d6b18,transparent 45%)}
+.grid-bg{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.13;background-image:linear-gradient(#ffffff0b 1px,transparent 1px),linear-gradient(90deg,#ffffff0b 1px,transparent 1px);background-size:65px 65px;mask-image:linear-gradient(to bottom,black,transparent 85%)}
 .orb{position:fixed;width:400px;height:400px;border-radius:50%;filter:blur(120px);opacity:.13;z-index:-1;pointer-events:none}
 .orb.a{background:#9333ea;top:10%;left:-250px}
 .orb.b{background:#ec4899;top:50%;right:-270px}
 
-nav{
-position:fixed;top:18px;left:50%;transform:translateX(-50%);
-width:min(1050px,94%);height:65px;padding:0 20px;
-display:flex;align-items:center;justify-content:space-between;
-border:1px solid #ffffff16;background:#15111edb;
-backdrop-filter:blur(22px);border-radius:19px;z-index:20;
-box-shadow:0 12px 50px #0005;
-}
+nav{position:fixed;top:18px;left:50%;transform:translateX(-50%);width:min(1050px,94%);height:65px;padding:0 20px;display:flex;align-items:center;justify-content:space-between;border:1px solid #ffffff16;background:#15111edb;backdrop-filter:blur(22px);border-radius:19px;z-index:20;box-shadow:0 12px 50px #0005}
 .brand{display:flex;align-items:center;gap:10px;font-size:17px;font-weight:850;letter-spacing:-.5px}
 .brand-icon{width:36px;height:36px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,#8b5cf6,#ec4899);box-shadow:0 0 25px #a855f755;font-size:21px}
 .navlinks{display:flex;gap:30px;color:#aaa1b8;font-size:12px;font-weight:600}
 .navlinks a:hover{color:white}
 .nav-right{display:flex;align-items:center;gap:12px}
 .launch-label{font-size:10px;letter-spacing:1px;color:#d8b4fe;background:#8b5cf622;border:1px solid #8b5cf644;padding:9px 13px;border-radius:30px;font-weight:800}
-.menu{display:none;background:none;border:0;color:white;font-size:23px}
 
 .hero{min-height:1050px;padding:180px 20px 100px;text-align:center;position:relative}
-.announcement{
-display:inline-flex;align-items:center;gap:10px;padding:9px 15px;
-border-radius:40px;background:#ffffff08;border:1px solid #ffffff17;
-color:#d4c8e8;font-size:11px;font-weight:650;
-}
+.announcement{display:inline-flex;align-items:center;gap:10px;padding:9px 15px;border-radius:40px;background:#ffffff08;border:1px solid #ffffff17;color:#d4c8e8;font-size:11px;font-weight:650}
 .live-dot{width:7px;height:7px;border-radius:50%;background:#c084fc;box-shadow:0 0 12px #c084fc;animation:pulse 1.5s infinite}
 .announcement b{color:#e9d5ff}
-h1{
-font-size:clamp(55px,9.5vw,112px);line-height:.99;
-letter-spacing:-8px;font-weight:900;margin:34px auto 25px;
-}
-.gradient{
-background:linear-gradient(100deg,#a78bfa 10%,#e879f9 52%,#f9a8d4 90%);
-background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;
-animation:gradient 5s linear infinite;
-}
+h1{font-size:clamp(55px,9.5vw,112px);line-height:.99;letter-spacing:-8px;font-weight:900;margin:34px auto 25px}
+.gradient{background:linear-gradient(100deg,#a78bfa 10%,#e879f9 52%,#f9a8d4 90%);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:gradient 5s linear infinite}
 .hero-description{max-width:590px;margin:auto;color:#aaa0b7;font-size:15px;line-height:1.9}
-.hero-actions{display:flex;justify-content:center;gap:13px;margin-top:32px}
-.primary,.secondary{padding:15px 22px;border-radius:13px;font-size:12px;font-weight:800;transition:.25s}
-.primary{background:linear-gradient(110deg,#7c3aed,#c026d3);box-shadow:0 7px 35px #9333ea55}
+.hero-actions{display:flex;justify-content:center;gap:13px;margin-top:32px;flex-wrap:wrap}
+.primary,.secondary{display:inline-block;padding:15px 22px;border-radius:13px;font-size:12px;font-weight:800;transition:.25s;border:0}
+.primary{background:linear-gradient(110deg,#7c3aed,#c026d3);box-shadow:0 7px 35px #9333ea55;color:white}
 .secondary{border:1px solid #ffffff22;background:#ffffff08;color:#e8dff3}
 .primary:hover,.secondary:hover{transform:translateY(-3px);filter:brightness(1.15)}
 .hero-note{margin-top:17px;font-size:10px;color:#71677e}
 
 .preview-wrap{width:min(900px,95%);margin:90px auto 0;position:relative;perspective:1200px}
 .preview-glow{position:absolute;inset:15% 10%;background:#9333ea;filter:blur(100px);opacity:.3}
-.preview{
-position:relative;text-align:left;border:1px solid #ffffff22;
-background:linear-gradient(145deg,#211a2d,#100d17);
-border-radius:23px;overflow:hidden;
-box-shadow:0 35px 100px #0009,0 0 70px #9333ea20;
-transform:rotateX(3deg);
-}
+.preview{position:relative;text-align:left;border:1px solid #ffffff22;background:linear-gradient(145deg,#211a2d,#100d17);border-radius:23px;overflow:hidden;box-shadow:0 35px 100px #0009,0 0 70px #9333ea20;transform:rotateX(3deg)}
 .preview-top{height:48px;border-bottom:1px solid #ffffff12;display:flex;align-items:center;padding:0 17px;gap:7px;background:#ffffff04}
 .window-dot{width:8px;height:8px;border-radius:50%;background:#695c79}
 .address{margin-left:15px;background:#ffffff08;border:1px solid #ffffff0b;border-radius:7px;padding:6px 15px;width:55%;font-size:9px;color:#8e829e}
@@ -103,11 +70,7 @@ section{padding:115px 22px}
 .section-heading{font-size:clamp(37px,6vw,65px);font-weight:900;letter-spacing:-4px;line-height:1.05}
 .section-copy{max-width:550px;margin:18px auto 0;color:var(--muted);font-size:13px;line-height:1.9}
 .features{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:60px}
-.feature{
-padding:28px;border-radius:21px;min-height:225px;
-border:1px solid #ffffff12;background:linear-gradient(145deg,#1b1527,#100d17);
-position:relative;overflow:hidden;transition:.3s;
-}
+.feature{padding:28px;border-radius:21px;min-height:225px;border:1px solid #ffffff12;background:linear-gradient(145deg,#1b1527,#100d17);position:relative;overflow:hidden;transition:.3s}
 .feature:before{content:"";position:absolute;width:150px;height:150px;right:-90px;top:-90px;border-radius:50%;background:#a855f7;filter:blur(65px);opacity:.2}
 .feature:hover{transform:translateY(-8px);border-color:#a78bfa66;box-shadow:0 15px 50px #0005}
 .feature-icon{width:47px;height:47px;border-radius:15px;background:linear-gradient(135deg,#8b5cf633,#ec489922);border:1px solid #a78bfa33;display:grid;place-items:center;font-size:21px;margin-bottom:27px}
@@ -115,11 +78,7 @@ position:relative;overflow:hidden;transition:.3s;
 .feature p{color:#a49aaf;font-size:12px;line-height:1.8}
 
 .showcase{display:grid;grid-template-columns:1fr 1fr;gap:65px;align-items:center}
-.showcase-visual{
-min-height:350px;border-radius:25px;border:1px solid #ffffff16;
-background:radial-gradient(ellipse at center,#6733a044,transparent 70%),#171220;
-display:grid;place-items:center;position:relative;overflow:hidden;
-}
+.showcase-visual{min-height:350px;border-radius:25px;border:1px solid #ffffff16;background:radial-gradient(ellipse at center,#6733a044,transparent 70%),#171220;display:grid;place-items:center;position:relative;overflow:hidden}
 .big-symbol{font-size:110px;color:#d8b4fe;text-shadow:0 0 55px #a855f799;animation:float 4s ease-in-out infinite}
 .ring{position:absolute;width:250px;height:250px;border:1px solid #c084fc33;border-radius:50%;animation:spin 20s linear infinite}
 .ring:before{content:"";position:absolute;top:20px;left:30px;width:8px;height:8px;background:#e879f9;border-radius:50%;box-shadow:0 0 20px #e879f9}
@@ -128,26 +87,29 @@ display:grid;place-items:center;position:relative;overflow:hidden;
 .check span{color:#c4b5fd;font-weight:900}
 
 .countdown-section{padding-top:80px}
-.countdown-card{
-padding:65px 20px;border-radius:30px;text-align:center;
-border:1px solid #ffffff18;
-background:radial-gradient(ellipse at 50% 0%,#7838a344,transparent 65%),linear-gradient(140deg,#1d1629,#100d17);
-box-shadow:0 25px 90px #0005;
-}
+.countdown-card{padding:65px 20px;border-radius:30px;text-align:center;border:1px solid #ffffff18;background:radial-gradient(ellipse at 50% 0%,#7838a344,transparent 65%),linear-gradient(140deg,#1d1629,#100d17);box-shadow:0 25px 90px #0005}
 .timer{display:flex;justify-content:center;gap:13px;margin:35px 0}
 .time{width:115px;padding:20px 10px;border:1px solid #ffffff16;background:#ffffff08;border-radius:17px}
 .time strong{display:block;font-size:39px;letter-spacing:-2px;font-weight:850}
 .time span{font-size:9px;color:#a89bb7;letter-spacing:2px;font-weight:800}
+
+.redeem-section{padding-top:50px}
+.redeem-form{display:flex;justify-content:center;gap:10px;max-width:510px;margin:30px auto 0}
+.redeem-form input{flex:1;min-width:0;padding:16px;border-radius:13px;border:1px solid #ffffff22;background:#ffffff09;color:white;outline:none;font:inherit;font-size:12px}
+.redeem-form input:focus{border-color:#a78bfa;box-shadow:0 0 25px #9333ea33}
+.redeem-message{margin-top:18px;color:#a49bb3;font-size:11px;min-height:16px}
+#earlyDownload{display:none;margin-top:25px}
 footer{border-top:1px solid #ffffff10;padding:30px 22px;color:#81768e;font-size:11px}
 .footer-inner{max-width:1050px;margin:auto;display:flex;justify-content:space-between;gap:15px}
 .reveal{opacity:0;transform:translateY(35px)}
+
 @keyframes pulse{50%{opacity:.4;transform:scale(.75)}}
 @keyframes gradient{to{background-position:200% center}}
 @keyframes float{50%{transform:translateY(-15px)}}
 @keyframes spin{to{transform:rotate(360deg)}}
 
 @media(max-width:750px){
-.navlinks{display:none}.menu{display:block}
+.navlinks{display:none}
 .hero{padding-top:155px;min-height:900px}
 h1{letter-spacing:-4px}
 .preview-content{grid-template-columns:1fr}
@@ -162,168 +124,227 @@ h1{letter-spacing:-4px}
 .time span{font-size:8px}
 .footer-inner{flex-direction:column;text-align:center}
 }
+@media(max-width:550px){.redeem-form{flex-direction:column}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
+
 <body>
-<div class="background"></div><div class="grid-bg"></div>
-<div class="orb a"></div><div class="orb b"></div>
+<div class="background"></div>
+<div class="grid-bg"></div>
+<div class="orb a"></div>
+<div class="orb b"></div>
 
 <nav>
-  <a class="brand" href="#"><span class="brand-icon">✦</span>PageAI</a>
-  <div class="navlinks">
-    <a href="#features">Features</a>
-    <a href="#experience">Experience</a>
-    <a href="#launch">Launch</a>
-  </div>
-  <div class="nav-right"><span class="launch-label">01 DECEMBER 2026</span></div>
+<a class="brand" href="#"><span class="brand-icon">✦</span>PageAI</a>
+<div class="navlinks">
+<a href="#features">Features</a>
+<a href="#experience">Experience</a>
+<a href="#launch">Launch</a>
+<a href="#redeem">Early access</a>
+</div>
+<div class="nav-right"><span class="launch-label">01 DECEMBER 2026</span></div>
 </nav>
 
 <header class="hero">
-  <div class="announcement hero-in"><span class="live-dot"></span> INTRODUCING PAGEAI <b>·</b> LAUNCHING SOON</div>
-  <h1 class="hero-in">The web,<br><span class="gradient">understood.</span></h1>
-  <p class="hero-description hero-in">A smarter way to browse. PageAI brings intelligent assistance directly to the pages you visit. Ask less. Discover more.</p>
-  <div class="hero-actions hero-in">
-    <a class="primary" href="#features">Explore PageAI ↗</a>
-    <a class="secondary" href="#launch">Countdown ↓</a>
-  </div>
-  <div class="hero-note hero-in">POWERED BY GOOGLE GEMINI · BUILT FOR YOUR BROWSER</div>
+<div class="announcement hero-in"><span class="live-dot"></span> INTRODUCING PAGEAI <b>·</b> LAUNCHING SOON</div>
+<h1 class="hero-in">The web,<br><span class="gradient">understood.</span></h1>
+<p class="hero-description hero-in">A smarter way to browse. PageAI brings intelligent assistance directly to the pages you visit. Ask less. Discover more.</p>
 
-  <div class="preview-wrap hero-in">
-    <div class="preview-glow"></div>
-    <div class="preview">
-      <div class="preview-top">
-        <span class="window-dot"></span><span class="window-dot"></span><span class="window-dot"></span>
-        <div class="address">example.com / learning / question</div>
-      </div>
-      <div class="preview-content">
-        <div class="fake-page">
-          <div class="fake-tag">YOUR WEBPAGE</div>
-          <div class="fake-heading">Learn something<br>new today.</div>
-          <div class="fake-line"></div><div class="fake-line short"></div>
-          <div class="fake-question">What is the main purpose of artificial intelligence, and how can it help people in everyday life?</div>
-        </div>
-        <div class="fake-answer">
-          <div class="answer-brand"><span class="mini-logo">✦</span> PageAI <span style="margin-left:auto;color:#a78bfa;font-size:9px">GEMINI</span></div>
-          <div class="answer-label">QUESTION</div>
-          <div class="answer-text">What is the main purpose of artificial intelligence?</div>
-          <div class="answer-label">EXPLANATION</div>
-          <div class="answer-text">AI helps computers perform tasks that normally require human intelligence, such as understanding language and solving problems.</div>
-          <div class="answer-label">ANSWER</div>
-          <div class="answer-pill">Helping people solve problems</div>
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="hero-actions hero-in">
+<a class="primary" href="#features">Explore PageAI ↗</a>
+<a class="secondary" href="#launch">Countdown ↓</a>
+</div>
+
+<div class="hero-actions hero-in" style="margin-top:13px">
+<a class="primary" href="./PageAI.zip" download>↓ Download PageAI ZIP</a>
+<a class="secondary" href="#redeem">Redeem early access ✦</a>
+</div>
+
+<div class="hero-note hero-in">POWERED BY GOOGLE GEMINI · BUILT FOR YOUR BROWSER</div>
+
+<div class="preview-wrap hero-in">
+<div class="preview-glow"></div>
+<div class="preview">
+<div class="preview-top">
+<span class="window-dot"></span><span class="window-dot"></span><span class="window-dot"></span>
+<div class="address">example.com / learning / question</div>
+</div>
+<div class="preview-content">
+<div class="fake-page">
+<div class="fake-tag">YOUR WEBPAGE</div>
+<div class="fake-heading">Learn something<br>new today.</div>
+<div class="fake-line"></div><div class="fake-line short"></div>
+<div class="fake-question">What is the main purpose of artificial intelligence, and how can it help people in everyday life?</div>
+</div>
+<div class="fake-answer">
+<div class="answer-brand"><span class="mini-logo">✦</span> PageAI <span style="margin-left:auto;color:#a78bfa;font-size:9px">GEMINI</span></div>
+<div class="answer-label">QUESTION</div>
+<div class="answer-text">What is the main purpose of artificial intelligence?</div>
+<div class="answer-label">EXPLANATION</div>
+<div class="answer-text">AI helps computers perform tasks that normally require human intelligence, such as understanding language and solving problems.</div>
+<div class="answer-label">ANSWER</div>
+<div class="answer-pill">Helping people solve problems</div>
+</div>
+</div>
+</div>
+</div>
 </header>
 
 <section id="features">
-  <div class="container center">
-    <div class="eyebrow reveal">A BETTER WAY TO BROWSE</div>
-    <h2 class="section-heading reveal">Meet your new<br><span class="gradient">favourite tool.</span></h2>
-    <p class="section-copy reveal">Everything you need to understand a webpage, get help with questions and keep moving.</p>
-    <div class="features">
-      <article class="feature reveal">
-        <div class="feature-icon">✦</div>
-        <h3>Page intelligence</h3>
-        <p>Understand the content on the page you're currently viewing without copying everything across.</p>
-      </article>
-      <article class="feature reveal">
-        <div class="feature-icon">⌕</div>
-        <h3>Smart answers</h3>
-        <p>Ask your own questions or let PageAI identify the question you're looking at.</p>
-      </article>
-      <article class="feature reveal">
-        <div class="feature-icon">▣</div>
-        <h3>Stay alongside</h3>
-        <p>Use the browser side panel to keep PageAI open while you explore other content.</p>
-      </article>
-    </div>
-  </div>
+<div class="container center">
+<div class="eyebrow reveal">A BETTER WAY TO BROWSE</div>
+<h2 class="section-heading reveal">Meet your new<br><span class="gradient">favourite tool.</span></h2>
+<p class="section-copy reveal">Everything you need to understand a webpage, get help with questions and keep moving.</p>
+<div class="features">
+<article class="feature reveal">
+<div class="feature-icon">✦</div>
+<h3>Page intelligence</h3>
+<p>Understand the content on the page you're currently viewing without copying everything across.</p>
+</article>
+<article class="feature reveal">
+<div class="feature-icon">⌕</div>
+<h3>Smart answers</h3>
+<p>Ask your own questions or let PageAI identify the question you're looking at.</p>
+</article>
+<article class="feature reveal">
+<div class="feature-icon">▣</div>
+<h3>Stay alongside</h3>
+<p>Use the browser side panel to keep PageAI open while you explore other content.</p>
+</article>
+</div>
+</div>
 </section>
 
 <section id="experience">
-  <div class="container showcase">
-    <div class="showcase-visual reveal">
-      <div class="ring"></div>
-      <div class="big-symbol">✦</div>
-    </div>
-    <div class="showcase-copy">
-      <div class="eyebrow reveal">MADE TO FIT YOUR FLOW</div>
-      <h2 class="section-heading reveal">Your page.<br><span class="gradient">Your assistant.</span></h2>
-      <p class="section-copy reveal">No complicated setup every time you need help. Open PageAI, scan your page and get a useful response.</p>
-      <div class="check reveal"><span>✦</span> Works alongside your browsing</div>
-      <div class="check reveal"><span>✦</span> Powered by Gemini AI</div>
-      <div class="check reveal"><span>✦</span> Designed for a cleaner workflow</div>
-    </div>
-  </div>
+<div class="container showcase">
+<div class="showcase-visual reveal">
+<div class="ring"></div>
+<div class="big-symbol">✦</div>
+</div>
+<div class="showcase-copy">
+<div class="eyebrow reveal">MADE TO FIT YOUR FLOW</div>
+<h2 class="section-heading reveal">Your page.<br><span class="gradient">Your assistant.</span></h2>
+<p class="section-copy reveal">No complicated setup every time you need help. Open PageAI, scan your page and get a useful response.</p>
+<div class="check reveal"><span>✦</span> Works alongside your browsing</div>
+<div class="check reveal"><span>✦</span> Powered by Gemini AI</div>
+<div class="check reveal"><span>✦</span> Designed for a cleaner workflow</div>
+</div>
+</div>
 </section>
 
 <section id="launch" class="countdown-section">
-  <div class="container">
-    <div class="countdown-card reveal">
-      <div class="eyebrow">THE COUNTDOWN IS ON</div>
-      <h2 class="section-heading">Something <span class="gradient">smarter</span><br>is almost here.</h2>
-      <p class="section-copy">PageAI launches on 1 December 2026.</p>
-      <div class="timer">
-        <div class="time"><strong id="days">00</strong><span>DAYS</span></div>
-        <div class="time"><strong id="hours">00</strong><span>HOURS</span></div>
-        <div class="time"><strong id="minutes">00</strong><span>MINUTES</span></div>
-        <div class="time"><strong id="seconds">00</strong><span>SECONDS</span></div>
-      </div>
-      <div class="announcement"><span class="live-dot"></span> LAUNCHING 01.12.2026</div>
-    </div>
-  </div>
+<div class="container">
+<div class="countdown-card reveal">
+<div class="eyebrow">THE COUNTDOWN IS ON</div>
+<h2 class="section-heading">Something <span class="gradient">smarter</span><br>is almost here.</h2>
+<p class="section-copy">PageAI launches on 1 December 2026.</p>
+<div class="timer">
+<div class="time"><strong id="days">00</strong><span>DAYS</span></div>
+<div class="time"><strong id="hours">00</strong><span>HOURS</span></div>
+<div class="time"><strong id="minutes">00</strong><span>MINUTES</span></div>
+<div class="time"><strong id="seconds">00</strong><span>SECONDS</span></div>
+</div>
+<div class="announcement"><span class="live-dot"></span> LAUNCHING 01.12.2026</div>
+</div>
+</div>
+</section>
+
+<section id="redeem" class="redeem-section">
+<div class="container">
+<div class="countdown-card reveal">
+<div class="eyebrow">PRIVATE INVITATION</div>
+<h2 class="section-heading">Get <span class="gradient">early access.</span></h2>
+<p class="section-copy">Have an invitation code? Enter it below to unlock your exclusive PageAI early access download.</p>
+
+<form id="redeemForm" class="redeem-form">
+<input id="accessCode" type="password" placeholder="Enter your early access code" autocomplete="off" required>
+<button class="primary" type="submit">Redeem code ↗</button>
+</form>
+
+<p id="redeemMessage" class="redeem-message">✦ Early access is invitation-only.</p>
+
+<a id="earlyDownload" class="primary" href="./PageAI.zip" download>↓ Download PageAI ZIP</a>
+</div>
+</div>
 </section>
 
 <footer>
-  <div class="footer-inner">
-    <span>✦ <b>PageAI</b> — The web, understood.</span>
-    <span>© 2026 PageAI. All rights reserved.</span>
-  </div>
+<div class="footer-inner">
+<span>✦ <b>PageAI</b> — The web, understood.</span>
+<span>© 2026 PageAI. All rights reserved.</span>
+</div>
 </footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+
 <script>
 gsap.registerPlugin(ScrollTrigger);
 
 gsap.from(".hero-in",{
-  opacity:0,y:35,duration:1,stagger:.13,ease:"power3.out",
-  delay:.15
+opacity:0,y:35,duration:1,stagger:.13,ease:"power3.out",delay:.15
 });
 
 gsap.to(".preview-wrap",{
-  y:-13,duration:3,ease:"sine.inOut",repeat:-1,yoyo:true
+y:-13,duration:3,ease:"sine.inOut",repeat:-1,yoyo:true
 });
 
 gsap.utils.toArray(".reveal").forEach(el=>{
-  gsap.to(el,{
-    opacity:1,y:0,duration:.9,ease:"power3.out",
-    scrollTrigger:{trigger:el,start:"top 88%",toggleActions:"play none none reverse"}
-  });
+gsap.to(el,{
+opacity:1,y:0,duration:.9,ease:"power3.out",
+scrollTrigger:{trigger:el,start:"top 88%",toggleActions:"play none none reverse"}
+});
 });
 
 const target=new Date("2026-12-01T00:00:00").getTime();
+
 function countdown(){
-  let diff=target-Date.now();
-  if(diff<=0){
-    document.querySelector(".countdown-card .section-heading").innerHTML="PageAI is <span class='gradient'>here.</span>";
-    ["days","hours","minutes","seconds"].forEach(id=>document.getElementById(id).textContent="00");
-    return;
-  }
-  const values={
-    days:Math.floor(diff/86400000),
-    hours:Math.floor(diff%86400000/3600000),
-    minutes:Math.floor(diff%3600000/60000),
-    seconds:Math.floor(diff%60000/1000)
-  };
-  Object.entries(values).forEach(([id,value])=>{
-    document.getElementById(id).textContent=String(value).padStart(2,"0");
-  });
+let diff=target-Date.now();
+
+if(diff<=0){
+document.querySelector("#launch .section-heading").innerHTML="PageAI is <span class='gradient'>here.</span>";
+["days","hours","minutes","seconds"].forEach(id=>{
+document.getElementById(id).textContent="00";
+});
+return;
 }
+
+const values={
+days:Math.floor(diff/86400000),
+hours:Math.floor(diff%86400000/3600000),
+minutes:Math.floor(diff%3600000/60000),
+seconds:Math.floor(diff%60000/1000)
+};
+
+Object.entries(values).forEach(([id,value])=>{
+document.getElementById(id).textContent=String(value).padStart(2,"0");
+});
+}
+
 countdown();
 setInterval(countdown,1000);
+
+// EARLY ACCESS REDEMPTION
+const PRIVATE_ACCESS_CODE="14859252EARLYACC3SS";
+
+document.getElementById("redeemForm").addEventListener("submit",function(e){
+e.preventDefault();
+
+const entered=document.getElementById("accessCode").value.trim();
+const message=document.getElementById("redeemMessage");
+const download=document.getElementById("earlyDownload");
+
+if(entered===PRIVATE_ACCESS_CODE){
+message.textContent="✦ Early access unlocked! Welcome to PageAI.";
+message.style.color="#c4b5fd";
+download.style.display="inline-block";
+}else{
+message.textContent="That invitation code is invalid. Please try again.";
+message.style.color="#fb7185";
+download.style.display="none";
+}
+});
 </script>
 </body>
 </html>
