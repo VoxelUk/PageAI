@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,457 +9,1750 @@
 
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-:root{--bg:#0b0911;--purple:#a78bfa;--pink:#ec4899;--muted:#a49bb3}
+
+:root{
+  --bg:#0b0911;
+  --surface:#171220;
+  --purple:#a78bfa;
+  --pink:#ec4899;
+  --muted:#a49bb3;
+  --border:#ffffff16;
+}
+
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:#fff;font-family:Inter,sans-serif;overflow-x:hidden}
+body{
+  background:var(--bg);
+  color:#fff;
+  font-family:Inter,sans-serif;
+  overflow-x:hidden;
+}
+
 a{text-decoration:none;color:inherit}
-button{font:inherit;cursor:pointer}
+button,input,textarea{font:inherit}
+button{cursor:pointer}
+
+[hidden]{display:none!important}
 
 .background{
-position:fixed;inset:0;z-index:-3;
-background:radial-gradient(ellipse at 50% 0%,#6225a52b,transparent 55%),radial-gradient(ellipse at 100% 60%,#a52d6b18,transparent 45%);
+  position:fixed;
+  inset:0;
+  z-index:-3;
+  background:
+    radial-gradient(ellipse at 50% 0%,#6225a52b,transparent 55%),
+    radial-gradient(ellipse at 100% 60%,#a52d6b18,transparent 45%);
 }
+
 .grid-bg{
-position:fixed;inset:0;z-index:-2;pointer-events:none;opacity:.13;
-background-image:linear-gradient(#ffffff0b 1px,transparent 1px),linear-gradient(90deg,#ffffff0b 1px,transparent 1px);
-background-size:65px 65px;
-mask-image:linear-gradient(to bottom,black,transparent 85%);
+  position:fixed;
+  inset:0;
+  z-index:-2;
+  pointer-events:none;
+  opacity:.13;
+  background-image:
+    linear-gradient(#ffffff0b 1px,transparent 1px),
+    linear-gradient(90deg,#ffffff0b 1px,transparent 1px);
+  background-size:65px 65px;
+  mask-image:linear-gradient(to bottom,black,transparent 85%);
 }
-.orb{position:fixed;width:400px;height:400px;border-radius:50%;filter:blur(120px);opacity:.13;z-index:-1;pointer-events:none}
+
+.orb{
+  position:fixed;
+  width:400px;
+  height:400px;
+  border-radius:50%;
+  filter:blur(120px);
+  opacity:.13;
+  z-index:-1;
+  pointer-events:none;
+}
+
 .orb.a{background:#9333ea;top:10%;left:-250px}
 .orb.b{background:#ec4899;top:50%;right:-270px}
 
+/* NAVIGATION */
+
 nav{
-position:fixed;top:18px;left:50%;transform:translateX(-50%);
-width:min(1050px,94%);height:65px;padding:0 20px;
-display:flex;align-items:center;justify-content:space-between;
-border:1px solid #ffffff16;background:#15111edb;
-backdrop-filter:blur(22px);border-radius:19px;z-index:20;
-box-shadow:0 12px 50px #0005;
+  position:fixed;
+  top:18px;
+  left:50%;
+  transform:translateX(-50%);
+  width:min(1050px,94%);
+  height:65px;
+  padding:0 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border:1px solid #ffffff16;
+  background:#15111edb;
+  backdrop-filter:blur(22px);
+  border-radius:19px;
+  z-index:20;
+  box-shadow:0 12px 50px #0005;
 }
-.brand{display:flex;align-items:center;gap:10px;font-size:17px;font-weight:850}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:17px;
+  font-weight:850;
+}
+
 .brand-icon{
-width:36px;height:36px;border-radius:12px;display:grid;place-items:center;
-background:linear-gradient(135deg,#8b5cf6,#ec4899);
-box-shadow:0 0 25px #a855f755;font-size:21px
+  width:36px;
+  height:36px;
+  border-radius:12px;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(135deg,#8b5cf6,#ec4899);
+  box-shadow:0 0 25px #a855f755;
+  font-size:21px;
 }
-.navlinks{display:flex;gap:25px;color:#aaa1b8;font-size:12px;font-weight:600}
+
+.navlinks{
+  display:flex;
+  gap:25px;
+  color:#aaa1b8;
+  font-size:12px;
+  font-weight:600;
+}
+
 .navlinks a:hover{color:white}
+
 .launch-label{
-font-size:10px;letter-spacing:1px;color:#d8b4fe;
-background:#8b5cf622;border:1px solid #8b5cf644;
-padding:9px 13px;border-radius:30px;font-weight:800
+  font-size:10px;
+  letter-spacing:1px;
+  color:#d8b4fe;
+  background:#8b5cf622;
+  border:1px solid #8b5cf644;
+  padding:9px 13px;
+  border-radius:30px;
+  font-weight:800;
 }
 
-.hero{min-height:1050px;padding:180px 20px 100px;text-align:center}
-.announcement{
-display:inline-flex;align-items:center;gap:10px;padding:9px 15px;
-border-radius:40px;background:#ffffff08;border:1px solid #ffffff17;
-color:#d4c8e8;font-size:11px;font-weight:650
-}
-.live-dot{
-width:7px;height:7px;border-radius:50%;background:#c084fc;
-box-shadow:0 0 12px #c084fc;animation:pulse 1.5s infinite
-}
-h1{
-font-size:clamp(55px,9.5vw,112px);line-height:.99;
-letter-spacing:-8px;font-weight:900;margin:34px auto 25px
-}
-.gradient{
-background:linear-gradient(100deg,#a78bfa 10%,#e879f9 52%,#f9a8d4 90%);
-background-size:200% auto;-webkit-background-clip:text;
-background-clip:text;color:transparent;
-animation:gradient 5s linear infinite
-}
-.hero-description{max-width:590px;margin:auto;color:#aaa0b7;font-size:15px;line-height:1.9}
-.hero-actions{display:flex;justify-content:center;gap:13px;margin-top:32px;flex-wrap:wrap}
+/* GENERAL BUTTONS */
+
 .primary,.secondary{
-display:inline-block;padding:15px 22px;border-radius:13px;
-font-size:12px;font-weight:800;transition:.25s;border:0
+  display:inline-flex;
+  justify-content:center;
+  align-items:center;
+  gap:8px;
+  padding:15px 22px;
+  border-radius:13px;
+  font-size:12px;
+  font-weight:800;
+  transition:.25s;
+  border:0;
+  color:white;
 }
-.primary{background:linear-gradient(110deg,#7c3aed,#c026d3);box-shadow:0 7px 35px #9333ea55;color:white}
-.secondary{border:1px solid #ffffff22;background:#ffffff08;color:#e8dff3}
-.primary:hover,.secondary:hover{transform:translateY(-3px);filter:brightness(1.15)}
-.hero-note{margin-top:17px;font-size:10px;color:#71677e}
 
-.preview-wrap{width:min(900px,95%);margin:90px auto 0;position:relative;perspective:1200px}
-.preview-glow{position:absolute;inset:15% 10%;background:#9333ea;filter:blur(100px);opacity:.3}
+.primary{
+  background:linear-gradient(110deg,#7c3aed,#c026d3);
+  box-shadow:0 7px 35px #9333ea55;
+}
+
+.secondary{
+  border:1px solid #ffffff22;
+  background:#ffffff08;
+  color:#e8dff3;
+}
+
+.primary:hover,.secondary:hover{
+  transform:translateY(-3px);
+  filter:brightness(1.15);
+}
+
+button:disabled{
+  opacity:.5;
+  cursor:not-allowed;
+  transform:none!important;
+}
+
+/* HERO */
+
+.hero{
+  min-height:1050px;
+  padding:180px 20px 100px;
+  text-align:center;
+}
+
+.announcement{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:9px 15px;
+  border-radius:40px;
+  background:#ffffff08;
+  border:1px solid #ffffff17;
+  color:#d4c8e8;
+  font-size:11px;
+  font-weight:650;
+}
+
+.live-dot{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#c084fc;
+  box-shadow:0 0 12px #c084fc;
+  animation:pulse 1.5s infinite;
+}
+
+h1{
+  font-size:clamp(55px,9.5vw,112px);
+  line-height:.99;
+  letter-spacing:-8px;
+  font-weight:900;
+  margin:34px auto 25px;
+}
+
+.gradient{
+  background:linear-gradient(100deg,#a78bfa 10%,#e879f9 52%,#f9a8d4 90%);
+  background-size:200% auto;
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  animation:gradient 5s linear infinite;
+}
+
+.hero-description{
+  max-width:590px;
+  margin:auto;
+  color:#aaa0b7;
+  font-size:15px;
+  line-height:1.9;
+}
+
+.hero-actions{
+  display:flex;
+  justify-content:center;
+  gap:13px;
+  margin-top:32px;
+  flex-wrap:wrap;
+}
+
+.hero-note{
+  margin-top:17px;
+  font-size:10px;
+  color:#71677e;
+}
+
+.preview-wrap{
+  width:min(900px,95%);
+  margin:90px auto 0;
+  position:relative;
+  perspective:1200px;
+}
+
+.preview-glow{
+  position:absolute;
+  inset:15% 10%;
+  background:#9333ea;
+  filter:blur(100px);
+  opacity:.3;
+}
+
 .preview{
-position:relative;text-align:left;border:1px solid #ffffff22;
-background:linear-gradient(145deg,#211a2d,#100d17);
-border-radius:23px;overflow:hidden;
-box-shadow:0 35px 100px #0009,0 0 70px #9333ea20;
-transform:rotateX(3deg)
+  position:relative;
+  text-align:left;
+  border:1px solid #ffffff22;
+  background:linear-gradient(145deg,#211a2d,#100d17);
+  border-radius:23px;
+  overflow:hidden;
+  box-shadow:0 35px 100px #0009,0 0 70px #9333ea20;
+  transform:rotateX(3deg);
 }
+
 .preview-top{
-height:48px;border-bottom:1px solid #ffffff12;
-display:flex;align-items:center;padding:0 17px;gap:7px;background:#ffffff04
+  height:48px;
+  border-bottom:1px solid #ffffff12;
+  display:flex;
+  align-items:center;
+  padding:0 17px;
+  gap:7px;
+  background:#ffffff04;
 }
-.window-dot{width:8px;height:8px;border-radius:50%;background:#695c79}
+
+.window-dot{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:#695c79;
+}
+
 .address{
-margin-left:15px;background:#ffffff08;border:1px solid #ffffff0b;
-border-radius:7px;padding:6px 15px;width:55%;font-size:9px;color:#8e829e
+  margin-left:15px;
+  background:#ffffff08;
+  border:1px solid #ffffff0b;
+  border-radius:7px;
+  padding:6px 15px;
+  width:55%;
+  font-size:9px;
+  color:#8e829e;
 }
-.preview-content{display:grid;grid-template-columns:1fr 290px;min-height:310px}
-.fake-page{padding:36px 35px;border-right:1px solid #ffffff10}
-.fake-tag{font-size:9px;color:#a78bfa;letter-spacing:2px;font-weight:800}
-.fake-heading{font-size:30px;font-weight:850;letter-spacing:-1.5px;margin:17px 0}
-.fake-line{height:7px;border-radius:10px;background:#ffffff12;margin:12px 0;width:85%}
+
+.preview-content{
+  display:grid;
+  grid-template-columns:1fr 290px;
+  min-height:310px;
+}
+
+.fake-page{
+  padding:36px 35px;
+  border-right:1px solid #ffffff10;
+}
+
+.fake-tag{
+  font-size:9px;
+  color:#a78bfa;
+  letter-spacing:2px;
+  font-weight:800;
+}
+
+.fake-heading{
+  font-size:30px;
+  font-weight:850;
+  letter-spacing:-1.5px;
+  margin:17px 0;
+}
+
+.fake-line{
+  height:7px;
+  border-radius:10px;
+  background:#ffffff12;
+  margin:12px 0;
+  width:85%;
+}
+
 .fake-line.short{width:55%}
+
 .fake-question{
-margin-top:27px;padding:17px;border:1px solid #ffffff12;
-background:#ffffff05;border-radius:12px;font-size:11px;color:#d6cce1;line-height:1.7
+  margin-top:27px;
+  padding:17px;
+  border:1px solid #ffffff12;
+  background:#ffffff05;
+  border-radius:12px;
+  font-size:11px;
+  color:#d6cce1;
+  line-height:1.7;
 }
-.fake-answer{padding:23px 18px;background:#171221}
-.answer-brand{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:800;margin-bottom:22px}
+
+.fake-answer{
+  padding:23px 18px;
+  background:#171221;
+}
+
+.answer-brand{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-size:12px;
+  font-weight:800;
+  margin-bottom:22px;
+}
+
 .mini-logo{
-width:25px;height:25px;display:grid;place-items:center;
-border-radius:8px;background:linear-gradient(135deg,#8b5cf6,#ec4899)
+  width:25px;
+  height:25px;
+  display:grid;
+  place-items:center;
+  border-radius:8px;
+  background:linear-gradient(135deg,#8b5cf6,#ec4899);
 }
-.answer-label{font-size:9px;letter-spacing:1.5px;color:#a78bfa;font-weight:800;margin:15px 0 7px}
-.answer-text{font-size:11px;color:#c6bbd2;line-height:1.7}
-.answer-pill{display:inline-block;background:#8b5cf622;color:#d8b4fe;border-radius:7px;padding:8px 11px;font-size:10px;margin-top:9px}
+
+.answer-label{
+  font-size:9px;
+  letter-spacing:1.5px;
+  color:#a78bfa;
+  font-weight:800;
+  margin:15px 0 7px;
+}
+
+.answer-text{
+  font-size:11px;
+  color:#c6bbd2;
+  line-height:1.7;
+}
+
+.answer-pill{
+  display:inline-block;
+  background:#8b5cf622;
+  color:#d8b4fe;
+  border-radius:7px;
+  padding:8px 11px;
+  font-size:10px;
+  margin-top:9px;
+}
+
+/* CONTENT SECTIONS */
 
 section{padding:115px 22px}
-.container{max-width:1050px;margin:auto}
-.center{text-align:center}
-.eyebrow{color:#c4b5fd;font-size:10px;letter-spacing:2.5px;font-weight:850;margin-bottom:17px}
-.section-heading{font-size:clamp(37px,6vw,65px);font-weight:900;letter-spacing:-4px;line-height:1.05}
-.section-copy{max-width:550px;margin:18px auto 0;color:var(--muted);font-size:13px;line-height:1.9}
 
-.features{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:60px}
+.container{
+  max-width:1050px;
+  margin:auto;
+}
+
+.center{text-align:center}
+
+.eyebrow{
+  color:#c4b5fd;
+  font-size:10px;
+  letter-spacing:2.5px;
+  font-weight:850;
+  margin-bottom:17px;
+}
+
+.section-heading{
+  font-size:clamp(37px,6vw,65px);
+  font-weight:900;
+  letter-spacing:-4px;
+  line-height:1.05;
+}
+
+.section-copy{
+  max-width:550px;
+  margin:18px auto 0;
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.9;
+}
+
+.features{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
+  margin-top:60px;
+}
+
 .feature{
-padding:28px;border-radius:21px;min-height:225px;
-border:1px solid #ffffff12;background:linear-gradient(145deg,#1b1527,#100d17);
-position:relative;overflow:hidden;transition:.3s
+  padding:28px;
+  border-radius:21px;
+  min-height:225px;
+  border:1px solid #ffffff12;
+  background:linear-gradient(145deg,#1b1527,#100d17);
+  position:relative;
+  overflow:hidden;
+  transition:.3s;
 }
+
 .feature:before{
-content:"";position:absolute;width:150px;height:150px;right:-90px;top:-90px;
-border-radius:50%;background:#a855f7;filter:blur(65px);opacity:.2
+  content:"";
+  position:absolute;
+  width:150px;
+  height:150px;
+  right:-90px;
+  top:-90px;
+  border-radius:50%;
+  background:#a855f7;
+  filter:blur(65px);
+  opacity:.2;
 }
-.feature:hover{transform:translateY(-8px);border-color:#a78bfa66;box-shadow:0 15px 50px #0005}
+
+.feature:hover{
+  transform:translateY(-8px);
+  border-color:#a78bfa66;
+  box-shadow:0 15px 50px #0005;
+}
+
 .feature-icon{
-width:47px;height:47px;border-radius:15px;
-background:linear-gradient(135deg,#8b5cf633,#ec489922);
-border:1px solid #a78bfa33;display:grid;place-items:center;font-size:21px;margin-bottom:27px
+  width:47px;
+  height:47px;
+  border-radius:15px;
+  background:linear-gradient(135deg,#8b5cf633,#ec489922);
+  border:1px solid #a78bfa33;
+  display:grid;
+  place-items:center;
+  font-size:21px;
+  margin-bottom:27px;
 }
+
 .feature h3{font-size:16px;margin-bottom:11px}
 .feature p{color:#a49aaf;font-size:12px;line-height:1.8}
 
-.showcase{display:grid;grid-template-columns:1fr 1fr;gap:65px;align-items:center}
-.showcase-visual{
-min-height:350px;border-radius:25px;border:1px solid #ffffff16;
-background:radial-gradient(ellipse at center,#6733a044,transparent 70%),#171220;
-display:grid;place-items:center;position:relative;overflow:hidden
+.showcase{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:65px;
+  align-items:center;
 }
-.big-symbol{font-size:110px;color:#d8b4fe;text-shadow:0 0 55px #a855f799;animation:float 4s ease-in-out infinite}
-.ring{position:absolute;width:250px;height:250px;border:1px solid #c084fc33;border-radius:50%;animation:spin 20s linear infinite}
-.ring:before{content:"";position:absolute;top:20px;left:30px;width:8px;height:8px;background:#e879f9;border-radius:50%;box-shadow:0 0 20px #e879f9}
-.showcase-copy .section-copy{margin:18px 0 25px}
-.check{display:flex;gap:12px;align-items:center;margin:14px 0;color:#c9bfd5;font-size:12px}
+
+.showcase-visual{
+  min-height:350px;
+  border-radius:25px;
+  border:1px solid #ffffff16;
+  background:
+    radial-gradient(ellipse at center,#6733a044,transparent 70%),
+    #171220;
+  display:grid;
+  place-items:center;
+  position:relative;
+  overflow:hidden;
+}
+
+.big-symbol{
+  font-size:110px;
+  color:#d8b4fe;
+  text-shadow:0 0 55px #a855f799;
+  animation:float 4s ease-in-out infinite;
+}
+
+.ring{
+  position:absolute;
+  width:250px;
+  height:250px;
+  border:1px solid #c084fc33;
+  border-radius:50%;
+  animation:spin 20s linear infinite;
+}
+
+.ring:before{
+  content:"";
+  position:absolute;
+  top:20px;
+  left:30px;
+  width:8px;
+  height:8px;
+  background:#e879f9;
+  border-radius:50%;
+  box-shadow:0 0 20px #e879f9;
+}
+
+.showcase-copy .section-copy{
+  margin:18px 0 25px;
+}
+
+.check{
+  display:flex;
+  gap:12px;
+  align-items:center;
+  margin:14px 0;
+  color:#c9bfd5;
+  font-size:12px;
+}
+
 .check span{color:#c4b5fd;font-weight:900}
 
+/* COUNTDOWN */
+
 .countdown-section{padding-top:80px}
+
 .countdown-card{
-padding:65px 20px;border-radius:30px;text-align:center;
-border:1px solid #ffffff18;
-background:radial-gradient(ellipse at 50% 0%,#7838a344,transparent 65%),linear-gradient(140deg,#1d1629,#100d17);
-box-shadow:0 25px 90px #0005
+  padding:65px 20px;
+  border-radius:30px;
+  text-align:center;
+  border:1px solid #ffffff18;
+  background:
+    radial-gradient(ellipse at 50% 0%,#7838a344,transparent 65%),
+    linear-gradient(140deg,#1d1629,#100d17);
+  box-shadow:0 25px 90px #0005;
 }
-.timer{display:flex;justify-content:center;gap:13px;margin:35px 0}
-.time{width:115px;padding:20px 10px;border:1px solid #ffffff16;background:#ffffff08;border-radius:17px}
-.time strong{display:block;font-size:39px;letter-spacing:-2px;font-weight:850}
-.time span{font-size:9px;color:#a89bb7;letter-spacing:2px;font-weight:800}
+
+.timer{
+  display:flex;
+  justify-content:center;
+  gap:13px;
+  margin:35px 0;
+}
+
+.time{
+  width:115px;
+  padding:20px 10px;
+  border:1px solid #ffffff16;
+  background:#ffffff08;
+  border-radius:17px;
+}
+
+.time strong{
+  display:block;
+  font-size:39px;
+  letter-spacing:-2px;
+  font-weight:850;
+}
+
+.time span{
+  font-size:9px;
+  color:#a89bb7;
+  letter-spacing:2px;
+  font-weight:800;
+}
+
+/* REDEEM */
 
 .redeem-section{padding-top:50px}
-.redeem-form{display:flex;justify-content:center;gap:10px;max-width:510px;margin:30px auto 0}
-.redeem-form input{
-flex:1;min-width:0;padding:16px;border-radius:13px;
-border:1px solid #ffffff22;background:#ffffff09;color:white;
-outline:none;font:inherit;font-size:12px
-}
-.redeem-form input:focus{border-color:#a78bfa;box-shadow:0 0 25px #9333ea33}
-.redeem-message{margin-top:18px;color:#a49bb3;font-size:11px;min-height:16px}
-#earlyDownload{display:none;margin-top:25px}
 
-footer{border-top:1px solid #ffffff10;padding:30px 22px;color:#81768e;font-size:11px}
-.footer-inner{max-width:1050px;margin:auto;display:flex;justify-content:space-between;gap:15px}
+.redeem-form{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  max-width:510px;
+  margin:30px auto 0;
+}
+
+.redeem-form input{
+  flex:1;
+  min-width:0;
+  padding:16px;
+  border-radius:13px;
+  border:1px solid #ffffff22;
+  background:#ffffff09;
+  color:white;
+  outline:none;
+  font:inherit;
+  font-size:12px;
+}
+
+.redeem-form input:focus{
+  border-color:#a78bfa;
+  box-shadow:0 0 25px #9333ea33;
+}
+
+.redeem-message{
+  margin-top:18px;
+  color:#a49bb3;
+  font-size:11px;
+  min-height:16px;
+}
+
+/* APP SCREENS */
+
+.app-screen{
+  min-height:100vh;
+  padding:115px 20px 60px;
+}
+
+.app-container{
+  width:min(850px,100%);
+  margin:auto;
+}
+
+.app-topbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  margin-bottom:35px;
+}
+
+.app-title{
+  font-size:clamp(30px,5vw,48px);
+  font-weight:900;
+  letter-spacing:-2px;
+}
+
+.app-subtitle{
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.7;
+  margin-top:8px;
+}
+
+.panel{
+  background:linear-gradient(145deg,#1b1527,#100d17);
+  border:1px solid #ffffff16;
+  border-radius:22px;
+  padding:25px;
+  box-shadow:0 20px 70px #0005;
+  margin-bottom:18px;
+}
+
+.panel-heading{
+  font-size:15px;
+  font-weight:800;
+  margin-bottom:8px;
+}
+
+.panel-description{
+  font-size:12px;
+  color:var(--muted);
+  line-height:1.7;
+}
+
+.upload-area{
+  margin-top:20px;
+  min-height:190px;
+  border:1px dashed #a78bfa66;
+  border-radius:17px;
+  background:#a78bfa08;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:20px;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.upload-area:hover{
+  border-color:#ec4899;
+  background:#a78bfa12;
+}
+
+.upload-icon{
+  width:54px;
+  height:54px;
+  display:grid;
+  place-items:center;
+  background:#a78bfa19;
+  border:1px solid #a78bfa33;
+  border-radius:17px;
+  font-size:25px;
+  margin-bottom:14px;
+}
+
+.upload-area strong{font-size:13px}
+.upload-area span{
+  color:var(--muted);
+  font-size:11px;
+  margin-top:8px;
+}
+
+#imageInput{display:none}
+
+.image-preview{
+  width:100%;
+  max-height:400px;
+  object-fit:contain;
+  border-radius:13px;
+  background:#08060d;
+  margin-top:18px;
+  border:1px solid #ffffff12;
+}
+
+.scanner-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:18px;
+}
+
+.scanner-actions button{flex:1}
+
+.text-input{
+  width:100%;
+  margin-top:16px;
+  padding:15px;
+  border-radius:12px;
+  border:1px solid #ffffff20;
+  background:#ffffff08;
+  color:white;
+  outline:none;
+  font-size:12px;
+  resize:vertical;
+}
+
+.text-input:focus{border-color:#a78bfa}
+
+.result-box{
+  display:none;
+  margin-top:22px;
+  padding:20px;
+  background:#0d0a14;
+  border:1px solid #a78bfa33;
+  border-radius:15px;
+}
+
+.result-box.visible{display:block}
+
+.result-heading{
+  color:#c4b5fd;
+  font-size:10px;
+  font-weight:850;
+  letter-spacing:2px;
+  margin-bottom:12px;
+}
+
+.result-content{
+  color:#e8e0f0;
+  font-size:13px;
+  line-height:1.9;
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
+}
+
+.status{
+  margin-top:14px;
+  min-height:17px;
+  font-size:11px;
+  color:var(--muted);
+  line-height:1.6;
+}
+
+.status.error{color:#fb7185}
+.status.success{color:#c4b5fd}
+
+.app-footer{
+  text-align:center;
+  color:#81768e;
+  font-size:10px;
+  margin-top:35px;
+}
+
+/* WEB DOWNLOAD */
+
+.download-card{
+  text-align:center;
+  padding:45px 25px;
+}
+
+.download-icon{
+  width:75px;
+  height:75px;
+  display:grid;
+  place-items:center;
+  margin:0 auto 22px;
+  border-radius:23px;
+  font-size:32px;
+  background:linear-gradient(135deg,#8b5cf633,#ec489922);
+  border:1px solid #a78bfa44;
+  box-shadow:0 0 40px #9333ea22;
+}
+
+.download-card h2{
+  font-size:25px;
+  font-weight:900;
+  letter-spacing:-1px;
+}
+
+.download-card p{
+  max-width:450px;
+  margin:12px auto 23px;
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.8;
+}
+
+/* FOOTER */
+
+footer{
+  border-top:1px solid #ffffff10;
+  padding:30px 22px;
+  color:#81768e;
+  font-size:11px;
+}
+
+.footer-inner{
+  max-width:1050px;
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+}
+
 .reveal{opacity:0;transform:translateY(35px)}
 
-@keyframes pulse{50%{opacity:.4;transform:scale(.75)}}
-@keyframes gradient{to{background-position:200% center}}
-@keyframes float{50%{transform:translateY(-15px)}}
-@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes pulse{
+  50%{opacity:.4;transform:scale(.75)}
+}
+
+@keyframes gradient{
+  to{background-position:200% center}
+}
+
+@keyframes float{
+  50%{transform:translateY(-15px)}
+}
+
+@keyframes spin{
+  to{transform:rotate(360deg)}
+}
+
+/* MOBILE */
 
 @media(max-width:750px){
-.navlinks{display:none}
-.hero{padding-top:155px;min-height:900px}
-h1{letter-spacing:-4px}
-.preview-content{grid-template-columns:1fr}
-.fake-page{border-right:0;border-bottom:1px solid #ffffff10;padding:25px}
-.fake-answer{padding:22px}
-.features{grid-template-columns:1fr}
-.showcase{grid-template-columns:1fr;gap:35px}
-.showcase-visual{min-height:280px}
-.timer{gap:6px}
-.time{width:76px;padding:15px 5px}
-.time strong{font-size:27px}
-.time span{font-size:8px}
-.footer-inner{flex-direction:column;text-align:center}
+  .navlinks{display:none}
+  .hero{padding-top:155px;min-height:900px}
+  h1{letter-spacing:-4px}
+  .preview-content{grid-template-columns:1fr}
+  .fake-page{
+    border-right:0;
+    border-bottom:1px solid #ffffff10;
+    padding:25px;
+  }
+  .fake-answer{padding:22px}
+  .features{grid-template-columns:1fr}
+  .showcase{grid-template-columns:1fr;gap:35px}
+  .showcase-visual{min-height:280px}
+  .timer{gap:6px}
+  .time{width:76px;padding:15px 5px}
+  .time strong{font-size:27px}
+  .time span{font-size:8px}
+  .footer-inner{
+    flex-direction:column;
+    text-align:center;
+  }
+  .app-topbar{align-items:flex-start}
 }
-@media(max-width:550px){.redeem-form{flex-direction:column}}
+
+@media(max-width:550px){
+  .redeem-form{flex-direction:column}
+  .app-screen{padding:105px 14px 40px}
+  .panel{padding:19px}
+  .scanner-actions{flex-direction:column}
+}
+
 @media(prefers-reduced-motion:reduce){
-*,*:before,*:after{animation:none!important;scroll-behavior:auto!important}
+  *,*:before,*:after{
+    animation:none!important;
+    scroll-behavior:auto!important;
+  }
 }
 </style>
 </head>
 
 <body>
+
 <div class="background"></div>
 <div class="grid-bg"></div>
 <div class="orb a"></div>
 <div class="orb b"></div>
 
+<!-- ORIGINAL LANDING PAGE -->
+
+<div id="landingPage">
+
 <nav>
-<a class="brand" href="#"><span class="brand-icon">✦</span>PageAI</a>
-<div class="navlinks">
-<a href="#features">Features</a>
-<a href="#experience">Experience</a>
-<a href="#launch">Launch</a>
-<a href="#redeem">Early access</a>
-</div>
-<div class="launch-label">01 DECEMBER 2026</div>
+  <a class="brand" href="#">
+    <span class="brand-icon">✦</span>PageAI
+  </a>
+
+  <div class="navlinks">
+    <a href="#features">Features</a>
+    <a href="#experience">Experience</a>
+    <a href="#launch">Launch</a>
+    <a href="#redeem">Early access</a>
+  </div>
+
+  <div class="launch-label">01 DECEMBER 2026</div>
 </nav>
 
 <header class="hero">
-<div class="announcement hero-in"><span class="live-dot"></span> INTRODUCING PAGEAI <b>·</b> LAUNCHING SOON</div>
 
-<h1 class="hero-in">The web,<br><span class="gradient">understood.</span></h1>
+  <div class="announcement hero-in">
+    <span class="live-dot"></span>
+    INTRODUCING PAGEAI <b>·</b> LAUNCHING SOON
+  </div>
 
-<p class="hero-description hero-in">
-A smarter way to browse. PageAI brings intelligent assistance directly to the pages you visit. Ask less. Discover more.
-</p>
+  <h1 class="hero-in">
+    The web,<br>
+    <span class="gradient">understood.</span>
+  </h1>
 
-<div class="hero-actions hero-in">
-<a class="primary" href="#features">Explore PageAI ↗</a>
-<a class="secondary" href="#launch">Countdown ↓</a>
-</div>
+  <p class="hero-description hero-in">
+    A smarter way to browse. PageAI brings intelligent assistance
+    directly to the pages you visit. Ask less. Discover more.
+  </p>
 
-<div class="hero-actions hero-in" style="margin-top:13px">
-<a class="secondary" href="#redeem">Redeem early access ✦</a>
-</div>
+  <div class="hero-actions hero-in">
+    <a class="primary" href="#features">Explore PageAI ↗</a>
+    <a class="secondary" href="#launch">Countdown ↓</a>
+  </div>
 
-<div class="hero-note hero-in">POWERED BY GOOGLE GEMINI · BUILT FOR YOUR BROWSER</div>
+  <div class="hero-actions hero-in" style="margin-top:13px">
+    <a class="secondary" href="#redeem">Redeem early access ✦</a>
+  </div>
 
-<div class="preview-wrap hero-in">
-<div class="preview-glow"></div>
-<div class="preview">
-<div class="preview-top">
-<span class="window-dot"></span><span class="window-dot"></span><span class="window-dot"></span>
-<div class="address">example.com / learning / question</div>
-</div>
-<div class="preview-content">
-<div class="fake-page">
-<div class="fake-tag">YOUR WEBPAGE</div>
-<div class="fake-heading">Learn something<br>new today.</div>
-<div class="fake-line"></div>
-<div class="fake-line short"></div>
-<div class="fake-question">What is the main purpose of artificial intelligence, and how can it help people in everyday life?</div>
-</div>
-<div class="fake-answer">
-<div class="answer-brand"><span class="mini-logo">✦</span> PageAI <span style="margin-left:auto;color:#a78bfa;font-size:9px">GEMINI</span></div>
-<div class="answer-label">QUESTION</div>
-<div class="answer-text">What is the main purpose of artificial intelligence?</div>
-<div class="answer-label">EXPLANATION</div>
-<div class="answer-text">AI helps computers perform tasks that normally require human intelligence, such as understanding language and solving problems.</div>
-<div class="answer-label">ANSWER</div>
-<div class="answer-pill">Helping people solve problems</div>
-</div>
-</div>
-</div>
-</div>
+  <div class="hero-note hero-in">
+    POWERED BY GOOGLE GEMINI · BUILT FOR YOUR BROWSER
+  </div>
+
+  <div class="preview-wrap hero-in">
+    <div class="preview-glow"></div>
+
+    <div class="preview">
+      <div class="preview-top">
+        <span class="window-dot"></span>
+        <span class="window-dot"></span>
+        <span class="window-dot"></span>
+        <div class="address">example.com / learning / question</div>
+      </div>
+
+      <div class="preview-content">
+        <div class="fake-page">
+          <div class="fake-tag">YOUR WEBPAGE</div>
+          <div class="fake-heading">Learn something<br>new today.</div>
+          <div class="fake-line"></div>
+          <div class="fake-line short"></div>
+
+          <div class="fake-question">
+            What is the main purpose of artificial intelligence,
+            and how can it help people in everyday life?
+          </div>
+        </div>
+
+        <div class="fake-answer">
+          <div class="answer-brand">
+            <span class="mini-logo">✦</span>
+            PageAI
+            <span style="margin-left:auto;color:#a78bfa;font-size:9px">GEMINI</span>
+          </div>
+
+          <div class="answer-label">QUESTION</div>
+          <div class="answer-text">
+            What is the main purpose of artificial intelligence?
+          </div>
+
+          <div class="answer-label">EXPLANATION</div>
+          <div class="answer-text">
+            AI helps computers perform tasks that normally require
+            human intelligence, such as understanding language and
+            solving problems.
+          </div>
+
+          <div class="answer-label">ANSWER</div>
+          <div class="answer-pill">Helping people solve problems</div>
+        </div>
+      </div>
+    </div>
+  </div>
 </header>
 
 <section id="features">
-<div class="container center">
-<div class="eyebrow reveal">A BETTER WAY TO BROWSE</div>
-<h2 class="section-heading reveal">Meet your new<br><span class="gradient">favourite tool.</span></h2>
-<p class="section-copy reveal">Everything you need to understand a webpage, get help with questions and keep moving.</p>
+  <div class="container center">
 
-<div class="features">
-<article class="feature reveal">
-<div class="feature-icon">✦</div>
-<h3>Page intelligence</h3>
-<p>Understand the content on the page you're currently viewing without copying everything across.</p>
-</article>
-<article class="feature reveal">
-<div class="feature-icon">⌕</div>
-<h3>Smart answers</h3>
-<p>Ask your own questions or let PageAI identify the question you're looking at.</p>
-</article>
-<article class="feature reveal">
-<div class="feature-icon">▣</div>
-<h3>Stay alongside</h3>
-<p>Use the browser side panel to keep PageAI open while you explore other content.</p>
-</article>
-</div>
-</div>
+    <div class="eyebrow reveal">A BETTER WAY TO BROWSE</div>
+
+    <h2 class="section-heading reveal">
+      Meet your new<br>
+      <span class="gradient">favourite tool.</span>
+    </h2>
+
+    <p class="section-copy reveal">
+      Everything you need to understand a webpage, get help with
+      questions and keep moving.
+    </p>
+
+    <div class="features">
+
+      <article class="feature reveal">
+        <div class="feature-icon">✦</div>
+        <h3>Page intelligence</h3>
+        <p>
+          Understand the content on the page you're currently viewing
+          without copying everything across.
+        </p>
+      </article>
+
+      <article class="feature reveal">
+        <div class="feature-icon">⌕</div>
+        <h3>Smart answers</h3>
+        <p>
+          Ask your own questions or let PageAI identify the question
+          you're looking at.
+        </p>
+      </article>
+
+      <article class="feature reveal">
+        <div class="feature-icon">▣</div>
+        <h3>Stay alongside</h3>
+        <p>
+          Use the browser side panel to keep PageAI open while you
+          explore other content.
+        </p>
+      </article>
+
+    </div>
+  </div>
 </section>
 
 <section id="experience">
-<div class="container showcase">
-<div class="showcase-visual reveal">
-<div class="ring"></div>
-<div class="big-symbol">✦</div>
-</div>
-<div class="showcase-copy">
-<div class="eyebrow reveal">MADE TO FIT YOUR FLOW</div>
-<h2 class="section-heading reveal">Your page.<br><span class="gradient">Your assistant.</span></h2>
-<p class="section-copy reveal">No complicated setup every time you need help. Open PageAI, scan your page and get a useful response.</p>
-<div class="check reveal"><span>✦</span> Works alongside your browsing</div>
-<div class="check reveal"><span>✦</span> Powered by Gemini AI</div>
-<div class="check reveal"><span>✦</span> Designed for a cleaner workflow</div>
-</div>
-</div>
+  <div class="container showcase">
+
+    <div class="showcase-visual reveal">
+      <div class="ring"></div>
+      <div class="big-symbol">✦</div>
+    </div>
+
+    <div class="showcase-copy">
+      <div class="eyebrow reveal">MADE TO FIT YOUR FLOW</div>
+
+      <h2 class="section-heading reveal">
+        Your page.<br>
+        <span class="gradient">Your assistant.</span>
+      </h2>
+
+      <p class="section-copy reveal">
+        No complicated setup every time you need help. Open PageAI,
+        scan your page and get a useful response.
+      </p>
+
+      <div class="check reveal"><span>✦</span> Works alongside your browsing</div>
+      <div class="check reveal"><span>✦</span> Powered by Gemini AI</div>
+      <div class="check reveal"><span>✦</span> Designed for a cleaner workflow</div>
+    </div>
+
+  </div>
 </section>
 
 <section id="launch" class="countdown-section">
-<div class="container">
-<div class="countdown-card reveal">
-<div class="eyebrow">THE COUNTDOWN IS ON</div>
-<h2 class="section-heading">Something <span class="gradient">smarter</span><br>is almost here.</h2>
-<p class="section-copy">PageAI launches on 1 December 2026.</p>
+  <div class="container">
 
-<div class="timer">
-<div class="time"><strong id="days">00</strong><span>DAYS</span></div>
-<div class="time"><strong id="hours">00</strong><span>HOURS</span></div>
-<div class="time"><strong id="minutes">00</strong><span>MINUTES</span></div>
-<div class="time"><strong id="seconds">00</strong><span>SECONDS</span></div>
-</div>
+    <div class="countdown-card reveal">
+      <div class="eyebrow">THE COUNTDOWN IS ON</div>
 
-<div class="announcement"><span class="live-dot"></span> LAUNCHING 01.12.2026</div>
-</div>
-</div>
+      <h2 class="section-heading">
+        Something <span class="gradient">smarter</span><br>
+        is almost here.
+      </h2>
+
+      <p class="section-copy">PageAI launches on 1 December 2026.</p>
+
+      <div class="timer">
+        <div class="time"><strong id="days">00</strong><span>DAYS</span></div>
+        <div class="time"><strong id="hours">00</strong><span>HOURS</span></div>
+        <div class="time"><strong id="minutes">00</strong><span>MINUTES</span></div>
+        <div class="time"><strong id="seconds">00</strong><span>SECONDS</span></div>
+      </div>
+
+      <div class="announcement">
+        <span class="live-dot"></span>
+        LAUNCHING 01.12.2026
+      </div>
+    </div>
+
+  </div>
 </section>
 
 <section id="redeem" class="redeem-section">
-<div class="container">
-<div class="countdown-card reveal">
-<div class="eyebrow">PRIVATE INVITATION</div>
-<h2 class="section-heading">Get <span class="gradient">early access.</span></h2>
-<p class="section-copy">Have an invitation code? Enter it below to unlock your exclusive PageAI early access download.</p>
+  <div class="container">
 
-<form id="redeemForm" class="redeem-form">
-<input
-id="accessCode"
-type="password"
-placeholder="Enter your early access code"
-autocomplete="off"
-required
->
-<button class="primary" type="submit">Redeem code ↗</button>
-</form>
+    <div class="countdown-card reveal">
 
-<p id="redeemMessage" class="redeem-message">✦ Early access is invitation-only.</p>
+      <div class="eyebrow">PRIVATE INVITATION</div>
 
-<a id="earlyDownload" class="primary" href="./PageAI.zip" download>
-↓ Download PageAI ZIP
-</a>
-</div>
-</div>
+      <h2 class="section-heading">
+        Get <span class="gradient">early access.</span>
+      </h2>
+
+      <p class="section-copy">
+        Enter your invitation code to unlock your PageAI experience.
+        Different codes unlock different versions.
+      </p>
+
+      <form id="redeemForm" class="redeem-form">
+        <input
+          id="accessCode"
+          type="password"
+          placeholder="Enter your early access code"
+          autocomplete="off"
+          required
+        >
+        <button class="primary" type="submit">Redeem code ↗</button>
+      </form>
+
+      <p id="redeemMessage" class="redeem-message">
+        ✦ Early access is invitation-only.
+      </p>
+
+    </div>
+  </div>
 </section>
 
 <footer>
-<div class="footer-inner">
-<span>✦ <b>PageAI</b> — The web, understood.</span>
-<span>© 2026 PageAI. All rights reserved.</span>
-</div>
+  <div class="footer-inner">
+    <span>✦ <b>PageAI</b> — The web, understood.</span>
+    <span>© 2026 PageAI. All rights reserved.</span>
+  </div>
 </footer>
+
+</div>
+
+<!-- WEB EARLY ACCESS SCREEN -->
+
+<main id="webApp" class="app-screen" hidden>
+  <div class="app-container">
+
+    <div class="app-topbar">
+      <div>
+        <a class="brand" href="#" onclick="returnToHome(event)">
+          <span class="brand-icon">✦</span>PageAI
+        </a>
+
+        <h1 class="app-title" style="margin-top:25px">
+          Web <span class="gradient">access.</span>
+        </h1>
+
+        <p class="app-subtitle">
+          Your PageAI browser experience is ready.
+        </p>
+      </div>
+
+      <button class="secondary" onclick="lockPageAI()">Lock ↗</button>
+    </div>
+
+    <div class="panel download-card">
+
+      <div class="download-icon">✦</div>
+
+      <h2>PageAI browser extension</h2>
+
+      <p>
+        Download the extension ZIP and install it in your supported
+        Chromium-based browser using the browser's extension developer
+        settings.
+      </p>
+
+      <a class="primary" href="./PageAI.zip" download>
+        ↓ Download PageAI extension
+      </a>
+
+      <p style="margin-top:22px;font-size:10px">
+        Make sure <b>PageAI.zip</b> is uploaded to the same GitHub
+        repository as this website.
+      </p>
+
+    </div>
+
+    <div class="panel">
+      <div class="panel-heading">What's included?</div>
+      <p class="panel-description">
+        PageAI is designed to help you understand webpages, identify
+        questions and get AI-powered explanations from your browser.
+      </p>
+    </div>
+
+    <div class="app-footer">✦ PAGEAI WEB EARLY ACCESS</div>
+
+  </div>
+</main>
+
+<!-- MOBILE SCANNER SCREEN -->
+
+<main id="mobileApp" class="app-screen" hidden>
+  <div class="app-container">
+
+    <div class="app-topbar">
+      <div>
+        <a class="brand" href="#" onclick="returnToHome(event)">
+          <span class="brand-icon">✦</span>PageAI
+        </a>
+
+        <h1 class="app-title" style="margin-top:25px">
+          Page <span class="gradient">scanner.</span>
+        </h1>
+
+        <p class="app-subtitle">
+          Upload a screenshot, ask a question and let PageAI analyse it.
+        </p>
+      </div>
+
+      <button class="secondary" onclick="lockPageAI()">Lock ↗</button>
+    </div>
+
+    <div class="panel">
+
+      <div class="panel-heading">01 — Upload screenshot</div>
+
+      <p class="panel-description">
+        Select a screenshot or photo containing the page or question
+        you want PageAI to understand.
+      </p>
+
+      <label class="upload-area" for="imageInput">
+        <div class="upload-icon">↑</div>
+        <strong>Choose an image</strong>
+        <span>PNG, JPG or WEBP · Maximum 10 MB</span>
+      </label>
+
+      <input
+        id="imageInput"
+        type="file"
+        accept="image/png,image/jpeg,image/webp"
+      >
+
+      <img id="imagePreview" class="image-preview" alt="Screenshot preview" hidden>
+
+      <div class="scanner-actions">
+        <button id="removeImage" class="secondary" type="button" hidden>
+          Remove image
+        </button>
+      </div>
+
+    </div>
+
+    <div class="panel">
+
+      <div class="panel-heading">02 — Your question</div>
+
+      <p class="panel-description">
+        Tell PageAI what you want to know. Leave this blank if you want
+        it to identify the question in the screenshot.
+      </p>
+
+      <textarea
+        id="userQuestion"
+        class="text-input"
+        rows="3"
+        placeholder="Ask PageAI something about this screenshot..."
+      ></textarea>
+
+      <div class="scanner-actions">
+        <button id="analyseButton" class="primary" type="button">
+          ✦ Analyse screenshot
+        </button>
+      </div>
+
+      <p id="scannerStatus" class="status">
+        Ready when you are.
+      </p>
+
+    </div>
+
+    <div id="resultBox" class="result-box">
+      <div class="result-heading">PAGEAI RESPONSE</div>
+      <div id="resultContent" class="result-content"></div>
+
+      <div class="scanner-actions">
+        <button id="copyResult" class="secondary" type="button">
+          Copy response
+        </button>
+      </div>
+    </div>
+
+    <div class="app-footer">
+      POWERED BY GEMINI · PAGEAI MOBILE EARLY ACCESS
+    </div>
+
+  </div>
+</main>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
 
 <script>
+/* =========================================
+   PAGEAI CONFIGURATION
+========================================= */
+
+// These codes are client-side demo codes.
+// Anyone who can inspect this public HTML can find them.
+
+const WEB_ACCESS_CODE = "PAI-WEB-9Q7X-K4MV-2N8R-T6YC";
+
+const MOBILE_ACCESS_CODE = "PAI-MOBILE-8Z3P-W6KD-4R9X-J2QA";
+
+// Your secure backend endpoint.
+// Deploy a backend separately and change this URL if needed.
+const ANALYSE_ENDPOINT = "/api/analyse";
+
+
+/* =========================================
+   LANDING PAGE ANIMATIONS
+========================================= */
+
 if(window.gsap && window.ScrollTrigger){
-gsap.registerPlugin(ScrollTrigger);
 
-gsap.from(".hero-in",{
-opacity:0,y:35,duration:1,stagger:.13,ease:"power3.out",delay:.15
-});
+  gsap.registerPlugin(ScrollTrigger);
 
-gsap.to(".preview-wrap",{
-y:-13,duration:3,ease:"sine.inOut",repeat:-1,yoyo:true
-});
+  gsap.from(".hero-in",{
+    opacity:0,
+    y:35,
+    duration:1,
+    stagger:.13,
+    ease:"power3.out",
+    delay:.15
+  });
 
-gsap.utils.toArray(".reveal").forEach(el=>{
-gsap.to(el,{
-opacity:1,y:0,duration:.9,ease:"power3.out",
-scrollTrigger:{
-trigger:el,
-start:"top 88%",
-toggleActions:"play none none reverse"
-}
-});
-});
+  gsap.to(".preview-wrap",{
+    y:-13,
+    duration:3,
+    ease:"sine.inOut",
+    repeat:-1,
+    yoyo:true
+  });
+
+  gsap.utils.toArray(".reveal").forEach(el=>{
+    gsap.to(el,{
+      opacity:1,
+      y:0,
+      duration:.9,
+      ease:"power3.out",
+      scrollTrigger:{
+        trigger:el,
+        start:"top 88%",
+        toggleActions:"play none none reverse"
+      }
+    });
+  });
+
 }else{
-document.querySelectorAll(".reveal").forEach(el=>{
-el.style.opacity="1";
-el.style.transform="none";
-});
-document.querySelectorAll(".hero-in").forEach(el=>{
-el.style.opacity="1";
-});
+
+  document.querySelectorAll(".reveal").forEach(el=>{
+    el.style.opacity="1";
+    el.style.transform="none";
+  });
+
+  document.querySelectorAll(".hero-in").forEach(el=>{
+    el.style.opacity="1";
+  });
+
 }
 
-const target=new Date("2026-12-01T00:00:00").getTime();
+
+/* =========================================
+   COUNTDOWN
+========================================= */
+
+const target = new Date("2026-12-01T00:00:00").getTime();
 
 function countdown(){
-let diff=target-Date.now();
 
-if(diff<=0){
-document.querySelector("#launch .section-heading").innerHTML="PageAI is <span class='gradient'>here.</span>";
-["days","hours","minutes","seconds"].forEach(id=>{
-document.getElementById(id).textContent="00";
-});
-return;
-}
+  let diff = target - Date.now();
 
-const values={
-days:Math.floor(diff/86400000),
-hours:Math.floor(diff%86400000/3600000),
-minutes:Math.floor(diff%3600000/60000),
-seconds:Math.floor(diff%60000/1000)
-};
+  if(diff <= 0){
 
-Object.entries(values).forEach(([id,value])=>{
-document.getElementById(id).textContent=String(value).padStart(2,"0");
-});
+    document.querySelector("#launch .section-heading").innerHTML =
+      "PageAI is <span class='gradient'>here.</span>";
+
+    ["days","hours","minutes","seconds"].forEach(id=>{
+      document.getElementById(id).textContent="00";
+    });
+
+    return;
+  }
+
+  const values = {
+    days:Math.floor(diff/86400000),
+    hours:Math.floor(diff%86400000/3600000),
+    minutes:Math.floor(diff%3600000/60000),
+    seconds:Math.floor(diff%60000/1000)
+  };
+
+  Object.entries(values).forEach(([id,value])=>{
+    document.getElementById(id).textContent =
+      String(value).padStart(2,"0");
+  });
 }
 
 countdown();
 setInterval(countdown,1000);
 
-// PAGEAI EARLY ACCESS
-const PRIVATE_ACCESS_CODE="14859252EARLYACC3SS";
+
+/* =========================================
+   SCREEN SWITCHING
+========================================= */
+
+const landingPage = document.getElementById("landingPage");
+const webApp = document.getElementById("webApp");
+const mobileApp = document.getElementById("mobileApp");
+
+function openApp(type){
+
+  landingPage.hidden = true;
+  webApp.hidden = true;
+  mobileApp.hidden = true;
+
+  if(type === "web"){
+    webApp.hidden = false;
+  }
+
+  if(type === "mobile"){
+    mobileApp.hidden = false;
+  }
+
+  window.scrollTo({top:0,behavior:"instant"});
+}
+
+function returnToHome(event){
+
+  if(event) event.preventDefault();
+
+  landingPage.hidden = false;
+  webApp.hidden = true;
+  mobileApp.hidden = true;
+
+  window.scrollTo({top:0,behavior:"instant"});
+
+}
+
+function lockPageAI(){
+
+  landingPage.hidden = false;
+  webApp.hidden = true;
+  mobileApp.hidden = true;
+
+  document.getElementById("accessCode").value = "";
+
+  const message = document.getElementById("redeemMessage");
+
+  message.textContent = "✦ PageAI has been locked.";
+  message.style.color = "#a49bb3";
+
+  window.scrollTo({top:0,behavior:"instant"});
+
+}
+
+
+/* =========================================
+   EARLY ACCESS REDEMPTION
+========================================= */
 
 document.getElementById("redeemForm").addEventListener("submit",function(e){
-e.preventDefault();
 
-const entered=document.getElementById("accessCode").value.trim();
-const message=document.getElementById("redeemMessage");
-const download=document.getElementById("earlyDownload");
+  e.preventDefault();
 
-if(entered===PRIVATE_ACCESS_CODE){
-message.textContent="✦ ACCESS GRANTED — Welcome to PageAI!";
-message.style.color="#c4b5fd";
-download.style.display="inline-block";
-document.getElementById("accessCode").value="";
-}else{
-message.textContent="ACCESS DENIED — Invalid invitation code.";
-message.style.color="#fb7185";
-download.style.display="none";
-}
+  const entered = document
+    .getElementById("accessCode")
+    .value
+    .trim();
+
+  const message = document.getElementById("redeemMessage");
+
+  if(entered === WEB_ACCESS_CODE){
+
+    message.textContent = "✦ WEB ACCESS GRANTED — Welcome to PageAI!";
+    message.style.color = "#c4b5fd";
+
+    openApp("web");
+
+  }else if(entered === MOBILE_ACCESS_CODE){
+
+    message.textContent = "✦ MOBILE ACCESS GRANTED — Welcome to PageAI!";
+    message.style.color = "#c4b5fd";
+
+    openApp("mobile");
+
+  }else{
+
+    message.textContent = "ACCESS DENIED — Invalid invitation code.";
+    message.style.color = "#fb7185";
+
+  }
+
 });
+
+
+/* =========================================
+   MOBILE SCREENSHOT UPLOAD
+========================================= */
+
+const imageInput = document.getElementById("imageInput");
+const imagePreview = document.getElementById("imagePreview");
+const removeImage = document.getElementById("removeImage");
+
+let selectedImage = null;
+let previewUrl = null;
+
+imageInput.addEventListener("change",function(){
+
+  const file = this.files && this.files[0];
+
+  if(!file) return;
+
+  const allowedTypes = [
+    "image/png",
+    "image/jpeg",
+    "image/webp"
+  ];
+
+  if(!allowedTypes.includes(file.type)){
+
+    setStatus("Please choose a PNG, JPG or WEBP image.","error");
+
+    this.value = "";
+    return;
+  }
+
+  if(file.size > 10 * 1024 * 1024){
+
+    setStatus("That image is too large. Maximum size is 10 MB.","error");
+
+    this.value = "";
+    return;
+  }
+
+  selectedImage = file;
+
+  if(previewUrl){
+    URL.revokeObjectURL(previewUrl);
+  }
+
+  previewUrl = URL.createObjectURL(file);
+
+  imagePreview.src = previewUrl;
+  imagePreview.hidden = false;
+  removeImage.hidden = false;
+
+  setStatus("Screenshot loaded successfully.","success");
+
+  document.getElementById("resultBox").classList.remove("visible");
+
+});
+
+
+removeImage.addEventListener("click",function(){
+
+  selectedImage = null;
+  imageInput.value = "";
+
+  if(previewUrl){
+    URL.revokeObjectURL(previewUrl);
+    previewUrl = null;
+  }
+
+  imagePreview.src = "";
+  imagePreview.hidden = true;
+  removeImage.hidden = true;
+
+  setStatus("Image removed. Upload another screenshot when ready.");
+
+});
+
+
+/* =========================================
+   SCANNER STATUS
+========================================= */
+
+function setStatus(message,type=""){
+
+  const status = document.getElementById("scannerStatus");
+
+  status.textContent = message;
+  status.className = "status";
+
+  if(type){
+    status.classList.add(type);
+  }
+
+}
+
+
+/* =========================================
+   GEMINI BACKEND REQUEST
+========================================= */
+
+const analyseButton = document.getElementById("analyseButton");
+
+analyseButton.addEventListener("click",async function(){
+
+  if(!selectedImage){
+
+    setStatus("Upload a screenshot before analysing.","error");
+    return;
+
+  }
+
+  const question = document
+    .getElementById("userQuestion")
+    .value
+    .trim();
+
+  const resultBox = document.getElementById("resultBox");
+  const resultContent = document.getElementById("resultContent");
+
+  analyseButton.disabled = true;
+  analyseButton.textContent = "Analysing...";
+
+  resultBox.classList.remove("visible");
+  setStatus("Sending screenshot to PageAI...");
+
+  try{
+
+    const formData = new FormData();
+
+    formData.append("image",selectedImage);
+    formData.append("question",question);
+
+    const response = await fetch(ANALYSE_ENDPOINT,{
+      method:"POST",
+      body:formData
+    });
+
+    if(!response.ok){
+
+      let errorMessage = "The analysis request failed.";
+
+      try{
+        const errorData = await response.json();
+
+        if(errorData.error){
+          errorMessage = errorData.error;
+        }
+
+      }catch(error){}
+
+      if(response.status === 404){
+        errorMessage =
+          "The Gemini backend is not installed yet. The scanner interface is ready, but /api/analyse needs to be deployed.";
+      }
+
+      throw new Error(errorMessage);
+
+    }
+
+    const data = await response.json();
+
+    if(!data.answer || typeof data.answer !== "string"){
+      throw new Error("PageAI received an unexpected response.");
+    }
+
+    resultContent.textContent = data.answer;
+    resultBox.classList.add("visible");
+
+    setStatus("Analysis complete.","success");
+
+    resultBox.scrollIntoView({
+      behavior:"smooth",
+      block:"nearest"
+    });
+
+  }catch(error){
+
+    console.error("PageAI analysis error:",error);
+
+    setStatus(error.message || "Something went wrong.","error");
+
+  }finally{
+
+    analyseButton.disabled = false;
+    analyseButton.textContent = "✦ Analyse screenshot";
+
+  }
+
+});
+
+
+/* =========================================
+   COPY RESPONSE
+========================================= */
+
+document.getElementById("copyResult").addEventListener("click",async function(){
+
+  const text = document.getElementById("resultContent").textContent;
+
+  try{
+
+    await navigator.clipboard.writeText(text);
+
+    this.textContent = "Copied!";
+
+    setTimeout(()=>{
+      this.textContent = "Copy response";
+    },1500);
+
+  }catch(error){
+
+    setStatus("Could not copy automatically. Select the response text instead.","error");
+
+  }
+
+});
+
+
+/* =========================================
+   CLEAN UP IMAGE PREVIEW
+========================================= */
+
+window.addEventListener("beforeunload",function(){
+
+  if(previewUrl){
+    URL.revokeObjectURL(previewUrl);
+  }
+
+});
+
 </script>
+
 </body>
 </html>
